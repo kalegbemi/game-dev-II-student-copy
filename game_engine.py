@@ -66,7 +66,7 @@ class Entity(pygame.sprite.Sprite):
 
 class Player(Entity):
     def __init__(self, kind, x, y):
-        super().__init__(kind, x, y, size=(24, 24), speed=5)
+        super().__init__(kind, x, y, size=(50, 50), speed=5)
         self.maxSpeed = 5
         self.maxHealth = 100
         self.attackDamage = 20
@@ -75,7 +75,7 @@ class Player(Entity):
 
 class Enemy(Entity):
     def __init__(self, kind, x, y):
-        super().__init__(kind, x, y, size=(22, 22), speed=2)
+        super().__init__(kind, x, y, size=(45, 45), speed=2)
         self.chase_distance = 200
 
     def chase_player(self, player, walls):
