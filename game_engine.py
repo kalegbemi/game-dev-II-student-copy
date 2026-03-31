@@ -6,7 +6,8 @@ from pathlib import Path
 
 TILE = 32
 DATA_FILE = "game_stats.json"
-IMAGE_DIR = Path("images")
+BASE_DIR = Path(__file__).resolve().parent
+IMAGE_DIR = BASE_DIR / "images"
 
 # Background images are selected by index
 BACKGROUND_FILES = [
@@ -42,12 +43,16 @@ FALLBACK_COLORS = {
 
 def load_image(filename, size=None, fallback_color=(255, 0, 255)):
     path = IMAGE_DIR / filename
+    print(f"loading file: {path}")
+    print(f"exists: {path.exists()}")
+
     try:
-        img = pygame.image.load(path.as_posix()).convert_alpha()
+        img = pygame.image.load(str(path)).convert_alpha()
         if size:
             img = pygame.transform.scale(img, size)
         return img
-    except Exception:
+    except Exception as e:
+        print(f"Failed to load image: {e}")
         surf = pygame.Surface(size if size else (TILE, TILE), pygame.SRCALPHA)
         surf.fill(fallback_color)
         return surf
